@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  portainer:
+    image: portainer/portainer
+    command: -H unix:///var/run/docker.sock
+    restart: always
+    ports:
+      - 9000:9000
+      - 8000:8000
+    environment:
+      VIRTUAL_HOST: portainer.domain.es
+      VIRTUAL_PORT: 9000
+      VIRTUAL_NETWORK: proxy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+
+volumes:
+  portainer_data:
+
+networks:
+  default:
+    proxy:
+      external: true
