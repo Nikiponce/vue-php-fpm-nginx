@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  front:
+    container_name: front
+    image: node:10.13-alpine
+    ports:
+      - 8080:8080
+    working_dir: /app
+    # command: /bin/sh -c "yarn global add @vue/cli && vue create . -y"
+    command: /bin/sh -c "yarn serve"
+    volumes:
+      - ./app:/app
+    networks:
+      - proxy
+    expose:
+      - 8080
+    environment:
+      HOST: 0.0.0.0
+      VIRTUAL_HOST: front.domain.es
+      VIRTUAL_PORT: 8080
+      VIRTUAL_NETWORK: proxy
+      # VIRTUAL_ROOT: /app
+
+networks:
+  proxy:
+    external: true
