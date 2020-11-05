@@ -12,7 +12,6 @@ services:
           - ./data/vhost:/etc/nginx/vhost.d
           - ./data/html:/usr/share/nginx/html
           - ./data/certs:/etc/nginx/certs
-        #   - ./data/fastcgi_params/fastcgi_params:/etc/nginx/fastcgi_params
         networks:
             - proxy
         environment:
