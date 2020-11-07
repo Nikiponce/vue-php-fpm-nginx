@@ -7,7 +7,10 @@ services:
     ports:
       - 9001:9000
       - 8000:8000
+    expose:
+      - 9001
     environment:
+      HOST: 0.0.0.0
       VIRTUAL_HOST: portainer.testy.com
       VIRTUAL_PORT: 9001
       VIRTUAL_NETWORK: proxy
@@ -16,10 +19,12 @@ services:
       - portainer_data:/data
     networks:
       - proxy
+      - portainer_net
 
 volumes:
   portainer_data:
 
 networks:
+  portainer_net:
   proxy:
     external: true
